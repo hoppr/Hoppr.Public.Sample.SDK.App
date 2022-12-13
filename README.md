@@ -13,14 +13,17 @@ Click [here](https://developer.samsung.com/smarttv/develop/getting-started/setti
 
 Close this repo using the command below:
 ```
-git clone https://github.com/hoppr/Hoppr.Sample.SDK.App.git
+git clone https://github.com/hoppr/Hoppr.Public.Sample.SDK.App
 ```
-## Run the app
+## Run the app on Samsung TV simulator
 Follow those steps to run the sample app:
 1. Open the project in tizen studio
 1. Right click on the project name (Sample - tv-samsung-6.5)
 1. In the menu, go to Run as
 1. Click Tizen web simulator application (Samsung TV)
+
+## Run the app on web browser
+Open tab1.html in your browser.
 
 ## Setup the ad
 Once you have setup the ads in the warren, you can change the app ID /API key in the code to point at your app ID / API key.
@@ -29,7 +32,7 @@ The app ID can be find within the ```<header>``` of the page (ex: tab1.html, tab
 Change this line with your own app ID: ```hopprtv.init('f3a3e74f-a436-4bed-aeb8-a51314ce8ebc', 'f3db2794-0a82-4c84-ab78-88b913d3e9e4', '11111');```
   
 ## Documentation
-Click [here](https://hoppr.atlassian.net/wiki/spaces/~62f47c0e5111209f4fe1096f/pages/1767833624/HopprTV+JS+SDK+Documentationl) to access our SDK documentation.
+Please reach out to Hoppr to get access to our SDK documentation.
 
 ## Required privileges
 
