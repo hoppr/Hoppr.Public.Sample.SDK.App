@@ -1,73 +1,79 @@
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script src="./main.js"></script>
-    <script async src="https://qa.hoppr.au/sdk/hopprtv.umd.js"></script>
-    <script>
-      window.hopprtv = window.hopprtv || { cmd: [] };
 
-      hopprtv.cmd.push(() => {
-      	hopprtv.init('f3a3e74f-a436-4bed-aeb8-a51314ce8ebc', 'f3db2794-0a82-4c84-ab78-88b913d3e9e4', '11111');
-        
-        hopprtv.ads.display('hoppr_ad_unit_3');
-        
-        hopprtv.events.send(
-	        hopprtv.eventType.ScreenView,
-	        {
-	          hopprScreenName: hopprtv.screenType.Home,
-	        }
-      	);
-      });
-    </script>
-  </head>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script src="./main.js"></script>
+  <script async src="https://qa.hoppr.au/sdk/hopprtv.umd.js"></script>
+  <script>
+    window.hopprtv = window.hopprtv || { cmd: [] };
 
-  <body onkeydown="handleKeydown(event);" onload="onBodyLoad('tab2')">
-    <div class="main_title">
-      <h1>Hoppr SDK sample app</h1>
+    hopprtv.cmd.push(() => {
+      hopprtv.init('f3a3e74f-a436-4bed-aeb8-a51314ce8ebc', 'f3db2794-0a82-4c84-ab78-88b913d3e9e4', '11111');
+
+      hopprtv.ads.display('hoppr_ad_unit_3');
+      hopprtv.ads.display('hoppr_ad_unit_1');
+
+      hopprtv.events.send(
+        hopprtv.eventType.ScreenView,
+        {
+          hopprScreenName: hopprtv.screenType.Home,
+        }
+      );
+    });
+  </script>
+</head>
+
+<body onkeydown="handleKeydown(event);" onload="onBodyLoad('tab2')">
+  <div class="main_title">
+    <h1>Hoppr SDK sample app</h1>
+  </div>
+
+  <div>
+    <button onclick="goToTab(1)" class="button" id="tab_1_button">
+      Banner
+    </button>
+    <button onclick="goToTab(2)" class="button" id="tab_2_button">
+      Interactive
+    </button>
+    <button onclick="goToTab(3)" class="button" id="tab_3_button">
+      Video ad
+    </button>
+    <button onclick="goToTab(4)" class="button" id="tab_4_button">
+      Video ad + content
+    </button>
+  </div>
+
+  <div class="sub_title">
+    <h1>Interactive</h1>
+  </div>
+
+  <div>
+    <div id="hoppr_ad_unit_3_interactive_container" style="width: 728px; height: 90px; margin-top: 24px">
+      <div id="hoppr_ad_unit_3"></div>
     </div>
-    
-    <div>
-      <button onclick="goToTab(1)" class="button" id="tab_1_button">
-        Banner
-      </button>
-      <button onclick="goToTab(2)" class="button" id="tab_2_button">
-        Interactive
-      </button>
-      <button onclick="goToTab(3)" class="button" id="tab_3_button">
-        Video
-      </button>
+    <div id="hoppr_ad_unit_4_interactive_container" style="width: 728px; height: 90px; margin-top: 24px">
+      <div id="hoppr_ad_unit_1"></div>
     </div>
+  </div>
 
-    <div class="sub_title">
-      <h1>Interactive</h1>
-    </div>
-
-	<div id="hoppr_ad_unit_3_interactive_container"
-		style="width: 728px; height: 90px; margin-top: 24px">
-		<div id="hoppr_ad_unit_3"></div>
-	</div>
-
-
-	<div style="margin-top: 24px">
-
+  <div style="margin-top: 24px">
     <div class="sub_sub_title">
       <h1>Category 1</h1>
     </div>
-      <div>
-        <button id="interactive_r0_c0" onclick="" class="button">
-          Button 1
-        </button>
-      </div>
-
-
+    <div>
+      <button id="interactive_r0_c0" onclick="" class="button">
+        Button 1
+      </button>
+    </div>
     <div class="sub_sub_title">
       <h1>Category 2</h1>
     </div>
-      <div>
-        <button id="interactive_r1_c0" onclick="" class="button">
-          Button 1
-        </button>
-      </div>
+    <div>
+      <button id="interactive_r1_c0" onclick="" class="button">
+        Button 1
+      </button>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

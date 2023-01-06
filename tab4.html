@@ -1,0 +1,148 @@
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script src="./main.js"></script>
+  <script async src="https://qa.hoppr.au/sdk/hopprtv.umd.js"></script>
+  <script>
+    window.hopprtv = window.hopprtv || { cmd: [] };
+
+    hopprtv.cmd.push(() => {
+      hopprtv.init('f3a3e74f-a436-4bed-aeb8-a51314ce8ebc', 'f3db2794-0a82-4c84-ab78-88b913d3e9e4', '11111');
+    });
+
+    function loadVideoAd() {
+      var player = document.getElementById('contentElement');
+
+      var originalDuration = 0;
+      var metaDataLoaded = false;
+      
+      player.load();
+
+      player.addEventListener('loadedmetadata', function (event) {
+        if (!metaDataLoaded) {
+          originalDuration = player.duration;
+          metaDataLoaded = true;
+        }
+      });
+
+      player.addEventListener('ended', (event) => {
+        console.log("on content ended", originalDuration, player.currentTime)
+        if (originalDuration == player.currentTime) {
+          hopprtv.cmd.push(() => {
+            hopprtv.ads.videoContentComplete('hoppr_ad_unit_6')
+          });
+        }
+      });
+
+      player.addEventListener('durationchange', (event) => { console.log("durationchange ", event); });
+
+
+      hopprtv.cmd.push(() => {
+        hopprtv.ads.loadVideo("hoppr_ad_unit_6", {
+          //videoPlayer: 'contentElement',
+          contentPlayback: player,
+          targeting: {
+            KEY_1: ["VALUE_1", "VALUE_2"],
+            KEY_2: "VALUE_3",
+          },
+          onStarted: function () {
+            console.log("onStarted");
+          },
+          onLoaded: function () {
+            console.log("onLoaded");
+          },
+          onCompleted: function () {
+            console.log("onCompleted");
+          },
+          onRemaingTimeIntervalTriggered: function (time) {
+            console.log("onRemaingTimeIntervalTriggered", time)
+          },
+          onClosed: function () {
+            console.log("onClosed");
+            player.play();
+          },
+          onContentPauseRequested: function () {
+            console.log("onContentPauseRequested");
+            player.pause();
+            // setupUIForAds();
+          },
+          onContentResumeRequested: function () {
+            console.log("onContentResumeRequested");
+            player.play();
+            // setupUIForContent();
+          },
+          onError: function (error) {
+            console.log("onError", error);
+            player.play();
+          },
+        });
+      });
+    }
+
+  </script>
+
+  <style>
+    #mainContainer {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+    }
+
+    #content,
+    #hoppr_ad_unit_6 {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+    }
+
+    #contentElement {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body onkeydown="handleKeydown(event);" onload="onBodyLoad('tab4')">
+
+  <div class="main_title">
+    <h1>Hoppr SDK sample app</h1>
+  </div>
+
+  <div>
+    <button onclick="goToTab(1)" class="button" id="tab_1_button">
+      Banner
+    </button>
+    <button onclick="goToTab(2)" class="button" id="tab_2_button">
+      Interactive
+    </button>
+    <button onclick="goToTab(3)" class="button" id="tab_3_button">
+      Video ad
+    </button>
+    <button onclick="goToTab(4)" class="button" id="tab_4_button">
+      Video ad + content
+    </button>
+  </div>
+
+  <div class="sub_title">
+    <h1>Video ad + content</h1>
+  </div>
+
+  <button onclick="loadVideoAd()" id="load_video_ad_3_button" class="button">Load video ad</button>
+
+  <div id="mainContainer">
+    <div id="content">
+      <video id="contentElement">
+        <source src="https://storage.googleapis.com/gvabox/media/samples/stock.mp4">
+        </source>
+      </video>
+    </div>
+    <div id="hoppr_ad_unit_6"></div>
+  </div>
+</body>
+
+</html>
